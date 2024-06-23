@@ -4,6 +4,9 @@
   "description": "aprediendo de bases de datos ",
   "main": "index.js",
   "type": "module",
+  "repository": {
+    "url": "https://github.com/Kelvinbache/base_datos-"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node js/server.mjs"
@@ -11,6 +14,7 @@
   "author": "kelvin",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
   }
 }
