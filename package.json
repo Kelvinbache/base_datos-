@@ -1,0 +1,16 @@
+{
+  "name": "base_datos",
+  "version": "1.0.0",
+  "description": "aprediendo de bases de datos ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node js/server.mjs"
+  },
+  "author": "kelvin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
