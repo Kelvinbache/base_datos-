@@ -13,6 +13,4 @@ app.disable("x-powered-by");
 app.use(route_get);
 app.use("/admin", route_post);
 
-app.listen(port, () => {
-  console.log("server is power");
-});
+app.listen(port);

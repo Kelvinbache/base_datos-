@@ -1,10 +1,18 @@
 import sqlite3 from "sqlite3";
 
 const sqlite = sqlite3.verbose();
-const db = new sqlite.Database("./BD_SQlite/db_users.db");
+const db = new sqlite.Database("./BD_SQlite/db_users.db", sqlite.OPEN_READWRITE, (err) => {
+  
+  if (err){
+    console.error(err);
+  }
 
-function init() {
-  db.run(`DROP TABLE IF EXISTS users`);
+});
+
+
+function init(name, lastName) {
+ 
+  db.run(`DROP TABLE IF EXISTS users`); //?--> is not function 
 
   db.run(`CREATE TABLE users 
     (
@@ -13,9 +21,10 @@ function init() {
        id INTEGER PRIMARY KEY
     )`);
 
-  const values = db.prepare("INSERT INTO users(name, lastName) VALUES(?,?)");
 
-  values.run(["kelvin", "abache"]); // get values of method post
+   const values = db.prepare("INSERT INTO users(name, lastName) VALUES(?,?)"); // 
+
+  values.run([name, lastName]); // get values of method post
   values.finalize();
 
   db.each("SELECT id,name,lastName FROM users", (err, row) => {
@@ -23,10 +32,14 @@ function init() {
       console.error("this error in db");
     }
 
-    console.log(row.name, row.lastName);
+    console.clear();
+    console.log(row.name, row.lastName,row.id); //--> remove is part 
+  
   });
 }
 
+
 // Lack a function of init here
-db.serialize(init);
-db.close();
+// the  base data is error, close connection 
+
+export { db, init };
