@@ -13,14 +13,15 @@ function drive_exit_data(err, row) {
     return console.error(err.message);
   }
 
-  return console.log(row.name);
+  return console.log(row.id);
 }
 
 function drive_input_data(err) {
   if (err) {
     return console.error(err.message);
   }
-  return console.log('insert data exit')
+
+  return console.log("insert data exit");
 }
 
 export { drive_error_connection, drive_exit_data, drive_input_data };

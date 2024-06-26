@@ -5,20 +5,25 @@ const sqlite = sqlite3.verbose();
 const db = new sqlite.Database("./BD_SQlite/db_users.db", sqlite.OPEN_READWRITE || sqlite.OPEN_CREATE,drive_error_connection);
 
 function drive_init() {
-  //----> drive error of exist ? 
-  // db.run(
-  //   ` 
-  //   CREATE TABLE users (
-  //   name TEXT NOT NULL,
-	// 	lastName TEXT NOT NULL,
-	// 	id PRIMARY KEY
-  // )`
-  // )
-  
 
-  db.run(`INSERT INTO users (name, lastName) VALUES(?,?)`,['kelvin','abache'], drive_input_data); // i as insert data in the table 
+ const create_table = db.prepare(
+  ` CREATE TABLE If NOT EXISTS users 
+  (
+      
+    name TEXT NOT NULL,
+		lastName TEXT NOT NULL,
+    ID INTEGER NOT NULL PRIMARY KEY
+    );
+  `
+);
 
-  db.each("SELECT name FROM users", drive_exit_data); //-- I as take out data ?
+create_table.run();
+
+ const insert = db.prepare(`INSERT INTO users (name, lastName) VALUES(?,?)`); // i as insert data in the table 
+ insert.run(['kelvin','abache'], drive_input_data);
+
+ 
+  db.each("SELECT name, lastName, ID FROM users", drive_exit_data); //-- I as take out data ?
 }
 
 db.serialize(drive_init);
