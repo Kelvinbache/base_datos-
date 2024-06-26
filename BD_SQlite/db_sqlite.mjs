@@ -1,45 +1,24 @@
 import sqlite3 from "sqlite3";
+import { drive_error_connection, drive_exit_data, drive_input_data } from "./controller_error/controller.mjs";
 
 const sqlite = sqlite3.verbose();
-const db = new sqlite.Database("./BD_SQlite/db_users.db", sqlite.OPEN_READWRITE, (err) => {
+const db = new sqlite.Database("./BD_SQlite/db_users.db", sqlite.OPEN_READWRITE || sqlite.OPEN_CREATE,drive_error_connection);
+
+function drive_init() {
+  //----> drive error of exist ? 
+  // db.run(
+  //   ` 
+  //   CREATE TABLE users (
+  //   name TEXT NOT NULL,
+	// 	lastName TEXT NOT NULL,
+	// 	id PRIMARY KEY
+  // )`
+  // )
   
-  if (err){
-    console.error(err);
-  }
 
-});
+  db.run(`INSERT INTO users (name, lastName) VALUES(?,?)`,['kelvin','abache'], drive_input_data); // i as insert data in the table 
 
-
-function init(name, lastName) {
- 
-  db.run(`DROP TABLE IF EXISTS users`); //?--> is not function 
-
-  db.run(`CREATE TABLE users 
-    (
-        name TEXT NOT NULL,
-       lastName TEXT NOT NULL,
-       id INTEGER PRIMARY KEY
-    )`);
-
-
-   const values = db.prepare("INSERT INTO users(name, lastName) VALUES(?,?)"); // 
-
-  values.run([name, lastName]); // get values of method post
-  values.finalize();
-
-  db.each("SELECT id,name,lastName FROM users", (err, row) => {
-    if (err) {
-      console.error("this error in db");
-    }
-
-    console.clear();
-    console.log(row.name, row.lastName,row.id); //--> remove is part 
-  
-  });
+  db.each("SELECT name FROM users", drive_exit_data); //-- I as take out data ?
 }
 
-
-// Lack a function of init here
-// the  base data is error, close connection 
-
-export { db, init };
+db.serialize(drive_init);
