@@ -10,7 +10,7 @@ app.use(express.json());
 app.disable("x-powered-by");
 
 // use routes
-app.use(route_get);
+app.use("/admin", route_get);
 app.use("/admin", route_post);
 
 app.listen(port);

@@ -18,7 +18,7 @@ const route_post = router.post("/create-user", (req, res,next) => {
 // Yeah the data is not value 
   if (value) {
     
-    res.status(406).json(value);
+    res.status(400).json(value);
     next();
 
   } else {
