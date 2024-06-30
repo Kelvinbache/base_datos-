@@ -1,17 +1,24 @@
 import { router } from "./route_father.mjs";
-import { error_http } from "../middleware/errors/errors_http/error_http.mjs";
+import { db } from "../BD_SQlite/db_sqlite.mjs";
 
-const route_get = router.get("/list-users", (req, res,next) => {
- 
-  if(!res.location(`http://localhost:3000/admin/list-users`)){
+const route_get = router.get("/list-users", (req, res, next) => {
+
+  function select() {
+   
+    db.all("SELECT name, lastName FROM users", [], (err, rows) => {
+   
+      if (err) {
+        res.status(404).json(err.message);
+        next();
+      }
+
+      res.status(200).json(rows);
+   
+    });
   
-  res.status(400).json(error_http);
-  next();
+  }
 
-}
-
-  res.status(200).json('ALl he left good')
-
+  db.serialize(select);
 
 });
 

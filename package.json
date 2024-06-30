@@ -9,12 +9,13 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch js/server.mjs"
+    "dev": "nodemon js/server.mjs"
   },
   "author": "kelvin",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+    "nodemon": "^3.1.4",
     "sqlite3": "^5.1.7"
   }
 }
