@@ -17,7 +17,7 @@ const route_get = router.get("/list-users", (req, res) => {
       }
     }
 
-    db.all("SELECT name, lastName FROM use", [], controller); 
+    db.all("SELECT name, lastName FROM users", [], controller); 
 }
 
   db.serialize(select);

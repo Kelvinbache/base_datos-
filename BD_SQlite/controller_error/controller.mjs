@@ -6,13 +6,11 @@ function drive_error_connection(err) {
   return console.log("The connection to base data is correct");
 }
 
-function drive_input_data(err,row) {
+function drive_input_data(err) {
 
   if (err) {
-    return console.error(err.message);
+    return console.error({"error":err.message,"errno":err.errno});
   }
-
-  return console.log("insert data exit");
 
 }
 

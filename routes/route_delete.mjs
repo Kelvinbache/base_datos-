@@ -5,10 +5,12 @@ const router_delete = router.delete("/delete-user", (req, res, next) => {
   const { name } = req.body;
 
   function delete_user() {
+    
     db.run(" DELETE FROM users WHERE name LIKE" + ` '%${name}%' `, (err) => {
     
   if (err) {
-        res.status(404).json(err.message);
+        res.status(404).json({error: err.message, "message of server": "closer Base data"});
+        db.close();
         next();
       }
     
