@@ -20,8 +20,10 @@ db.run(  `
 `);
 
 // insert data in the table
- const insert = db.prepare(`INSERT INTO use (name, lastName) VALUES(?,?)`, drive_input_data); 
- insert.run([name,lastName]);
+
+
+const insert = db.prepare(`INSERT INTO users (name, lastName) VALUES(?,?)`, drive_input_data); 
+insert.run([name,lastName]);
 
  
 

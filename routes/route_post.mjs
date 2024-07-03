@@ -20,18 +20,12 @@ const route_post = router.post("/create-user", (req, res, next) => {
     res.status(400).json(value);
     next();
   
-  } try {
-
-      db.serialize(drive_init(name, lastName));
+    }
+  
+     db.serialize(drive_init(name, lastName));
       res.status(200).send("submit is exit");
   
-    } catch (error) {
   
-      res.status(400).json({ message: "is error in insert data" });
-      db.close();
-  
-    }
-
     
 
 });
